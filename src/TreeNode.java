@@ -111,11 +111,25 @@ public class TreeNode<T> {
         XNode.parent=null;
         return XNode;
     }
+
+    private void replaceParent(TreeNode<T> XNode, TreeNode<T> GNode) {
+        TreeNode<T> GParent = GNode.parent;
+        if (GParent == null) {
+            XNode.parent = null;
+            return;
+        }
+        if (GNode.isLeftChild()) {
+            setLeftChild(GParent, XNode);
+        } else {
+            setRightChild(GParent, XNode);
+        }
+
+    }
     private TreeNode<T> zigZigLeft() {
         assert !isRoot();
         TreeNode<T> XNode = this.left;
         TreeNode<T> GNode = this.parent;
-        XNode.parent=GNode.parent;
+        replaceParent(XNode, GNode);
         rotateLeft(GNode, this);
         rotateLeft(this, XNode);
         return XNode;
@@ -124,7 +138,7 @@ public class TreeNode<T> {
         assert !isRoot();
         TreeNode<T> XNode = this.left;
         TreeNode<T> GNode = this.parent;
-        XNode.parent=GNode.parent;
+        replaceParent(XNode, GNode);
         rotateLeft(this, XNode);
         rotateRight(GNode, XNode);
         return XNode;
@@ -133,7 +147,7 @@ public class TreeNode<T> {
         assert !isRoot();
         TreeNode<T> XNode = this.right;
         TreeNode<T> GNode = this.parent;
-        XNode.parent=GNode.parent;
+        replaceParent(XNode, GNode);
         rotateRight(this, XNode);
         rotateLeft(GNode, XNode);
         return XNode;
@@ -143,7 +157,7 @@ public class TreeNode<T> {
         assert !isRoot();
         TreeNode<T> XNode = this.right;
         TreeNode<T> GNode = this.parent;
-        XNode.parent=GNode.parent;
+        replaceParent(XNode, GNode);
         rotateRight(GNode, this);
         rotateRight(this, XNode);
         return XNode;
@@ -178,6 +192,19 @@ public class TreeNode<T> {
             result += right.print();
         }
         return result;
+    }
+
+    public void clear() {
+        if (hasLeft()) {
+            left.parent=null;
+            left.clear();
+            left=null;
+        }
+        if (hasRight()) {
+            right.parent=null;
+            right.clear();
+            right=null;
+        }
     }
 }
 

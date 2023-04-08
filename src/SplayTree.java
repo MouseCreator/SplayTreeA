@@ -83,7 +83,7 @@ public class SplayTree<T> {
                     current=current.getLeft();
                 else
                     return current;
-            } else if (current.isLower(value)) {
+            } else {
                 if (current.hasRight())
                     current=current.getRight();
                 else
@@ -111,5 +111,12 @@ public class SplayTree<T> {
         if (root == null)
             return "Empty tree";
         return "[" + root.print() + "]";
+    }
+
+    public void clear() {
+        if (root == null)
+            return;
+        root.clear();
+        root=null;
     }
 }
