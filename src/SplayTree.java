@@ -74,7 +74,7 @@ public final class SplayTree<T> {
      * @return більше піддерево
      */
     public SplayTree<T> split(T value) {
-        TreeNode<T> target = findToInsert(value);
+        TreeNode<T> target = findToSplit(value);
         splay(target);
         SplayTree<T> other;
         if (this.root.isGreater(value)) {
@@ -145,6 +145,28 @@ public final class SplayTree<T> {
      * @return вузол, після якого має бути вставлене нове значення
      */
     private TreeNode<T> findToInsert(T value) {
+        TreeNode<T> current = root;
+        while (true) {
+            if (current.isLower(value)) {
+                if (current.hasRight())
+                    current=current.getRight();
+                else
+                    return current;
+            } else {
+                if (current.hasLeft())
+                    current=current.getLeft();
+                else
+                    return current;
+            }
+        }
+    }
+
+    /**
+     * Пошук вузла для вставки значення
+     * @param value - значення, що потрібно знайти
+     * @return вузол, після якого має бути вставлене нове значення
+     */
+    private TreeNode<T> findToSplit(T value) {
         TreeNode<T> current = root;
         while (true) {
             if (current.isValueOf(value)) {
