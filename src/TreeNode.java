@@ -156,9 +156,6 @@ public class TreeNode<T> {
         return right;
     }
 
-    public TreeNode<T> getParent() {
-        return parent;
-    }
 
     public void setRight(TreeNode<T> subtree) {
         this.right = subtree;
@@ -176,14 +173,13 @@ public class TreeNode<T> {
         String result = "";
         if (hasLeft()) {
             result += left.print();
+            result += ", ";
         }
-        result += " ";
         result += this.value.toString();
         if (hasRight()) {
-            result += " ";
+            result += ", ";
             result += right.print();
         }
-        result += " ";
         return result;
     }
 }
