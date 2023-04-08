@@ -79,7 +79,7 @@ class SplayTreeTest {
             for (Double d : list) {
                 tree.add(d);
             }
-            tree.find(5.0);
+            assertTrue(tree.find(5.0));
             assertTrue(tree.root.isValueOf(5.0));
             assertEquals("[1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0]", tree.print());
         }
@@ -92,12 +92,31 @@ class SplayTreeTest {
 
     @Test
     void testAddingOrder() {
-        String v = "4.0, 3.0, 6.0, 8.0, 1.0, 2.0, 5.0, 7.0, 9.0";
+        String v = "6.0, 9.0, 3.0, 5.0, 4.0, 2.0, 1.0, 7.0, 8.0";
         SplayTree<Double> tree = new SplayTree<>(new DoublesComparator());
         String[] nums = v.split(", ");
         for (String n : nums) {
             tree.add(Double.parseDouble(n));
         }
         assertEquals("[1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0]", tree.print());
+    }
+
+    @Test
+    void testSplit() {
+        SplayTree<Double> tree = new SplayTree<>(new DoublesComparator());
+        ArrayList<Double> list = createArray();
+        for (int i = 0; i < 20; i++) {
+            Collections.shuffle(list);
+            tree.clear();
+            for (Double d : list) {
+                tree.add(d);
+            }
+
+            SplayTree<Double> other = tree.split(5.0);
+            if (!tree.root.isValueOf(5.0))
+                System.out.println(list);
+            assertTrue(tree.root.isValueOf(5.0));
+            assertEquals(9, tree.size() + other.size());
+        }
     }
 }

@@ -194,6 +194,17 @@ class TreeNode<T> {
         return result;
     }
 
+    public int size() {
+        int mySize = 1;
+        if (hasLeft()) {
+           mySize += left.size();
+        }
+        if (hasRight()) {
+            mySize += right.size();
+        }
+        return mySize;
+    }
+
     public void clear() {
         if (hasLeft()) {
             left.parent=null;
@@ -209,6 +220,10 @@ class TreeNode<T> {
 
     public void setParent(TreeNode<T> treeNode) {
         this.parent = treeNode;
+    }
+
+    public T getValue() {
+        return value;
     }
 }
 
