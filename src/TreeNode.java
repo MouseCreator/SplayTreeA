@@ -124,20 +124,28 @@ public class TreeNode<T> {
     }
     private TreeNode<T> zigZagLeft() {
         assert !isRoot();
-        return null;
+        TreeNode<T> XNode = this.left;
+        TreeNode<T> GNode = this.parent;
+        rotateLeft(this, XNode);
+        rotateRight(GNode, XNode);
+        return XNode;
     }
     private TreeNode<T> zigZagRight() {
+        assert !isRoot();
+        TreeNode<T> XNode = this.right;
+        TreeNode<T> GNode = this.parent;
+        rotateRight(this, XNode);
+        rotateLeft(GNode, XNode);
+        return XNode;
+    }
+
+    private TreeNode<T> zigZigRight() {
         assert !isRoot();
         TreeNode<T> XNode = this.right;
         TreeNode<T> GNode = this.parent;
         rotateRight(GNode, this);
         rotateRight(this, XNode);
         return XNode;
-    }
-
-    private TreeNode<T> zigZigRight() {
-        assert !isRoot();
-        return null;
     }
 }
 
