@@ -62,6 +62,10 @@ public class SplayTree<T> {
         root.setRight(bigger.root);
     }
     public void add(T value) {
+        if (root == null) {
+            root = new TreeNode<>(value, null, this);
+            return;
+        }
         TreeNode<T> target = findLeaf(value);
         TreeNode<T> additionalNode = new TreeNode<>(value, target, this);
         if (additionalNode.isLower(value)) {
@@ -100,5 +104,11 @@ public class SplayTree<T> {
 
     void setRoot(TreeNode<T> root) {
         this.root = root;
+    }
+
+    public String print() {
+        if (root == null)
+            return "Empty tree";
+        return "[" + root.print() + "]";
     }
 }

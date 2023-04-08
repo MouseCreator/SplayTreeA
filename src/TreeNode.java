@@ -165,5 +165,20 @@ public class TreeNode<T> {
     public void setLeft(TreeNode<T> left) {
         this.left = left;
     }
+
+    public String print() {
+        String result = "";
+        if (hasLeft()) {
+            result += left.print();
+        }
+        result += " ";
+        result += this.value.toString();
+        if (hasRight()) {
+            result += " ";
+            result += right.print();
+        }
+        result += " ";
+        return result;
+    }
 }
 
