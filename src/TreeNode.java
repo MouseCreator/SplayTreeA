@@ -96,10 +96,10 @@ public class TreeNode<T> {
 
     private void rotateLeft(TreeNode<T> upper, TreeNode<T> lower) {
         setLeftChild(upper, lower.right);
-        setRightChild(lower, this);
+        setRightChild(lower, upper);
     }
     private void rotateRight(TreeNode<T> upper, TreeNode<T> lower) {
-        setRightChild(upper, lower.right);
+        setRightChild(upper, lower.left);
         setLeftChild(lower, upper);
     }
 
@@ -114,6 +114,7 @@ public class TreeNode<T> {
         assert !isRoot();
         TreeNode<T> XNode = this.left;
         TreeNode<T> GNode = this.parent;
+        XNode.parent=GNode.parent;
         rotateLeft(GNode, this);
         rotateLeft(this, XNode);
         return XNode;
@@ -122,6 +123,7 @@ public class TreeNode<T> {
         assert !isRoot();
         TreeNode<T> XNode = this.left;
         TreeNode<T> GNode = this.parent;
+        XNode.parent=GNode.parent;
         rotateLeft(this, XNode);
         rotateRight(GNode, XNode);
         return XNode;
@@ -130,6 +132,7 @@ public class TreeNode<T> {
         assert !isRoot();
         TreeNode<T> XNode = this.right;
         TreeNode<T> GNode = this.parent;
+        XNode.parent=GNode.parent;
         rotateRight(this, XNode);
         rotateLeft(GNode, XNode);
         return XNode;
@@ -139,6 +142,7 @@ public class TreeNode<T> {
         assert !isRoot();
         TreeNode<T> XNode = this.right;
         TreeNode<T> GNode = this.parent;
+        XNode.parent=GNode.parent;
         rotateRight(GNode, this);
         rotateRight(this, XNode);
         return XNode;
