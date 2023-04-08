@@ -153,5 +153,17 @@ public class TreeNode<T> {
     public TreeNode<T> getParent() {
         return parent;
     }
+
+    public void setRight(TreeNode<T> subtree) {
+        this.right = subtree;
+    }
+
+    public boolean isNotLeaf() {
+        return !hasLeft() && !hasRight();
+    }
+
+    public void setLeft(TreeNode<T> left) {
+        this.left = left;
+    }
 }
 
