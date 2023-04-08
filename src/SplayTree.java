@@ -66,25 +66,30 @@ public class SplayTree<T> {
             root = new TreeNode<>(value, null, this);
             return;
         }
-        TreeNode<T> target = findLeaf(value);
+        TreeNode<T> target = findToInsert(value);
         TreeNode<T> additionalNode = new TreeNode<>(value, target, this);
         if (target.isLower(value)) {
-            target.setLeft(additionalNode);
-        } else {
             target.setRight(additionalNode);
+        } else {
+            target.setLeft(additionalNode);
         }
         splay(additionalNode);
     }
-    private TreeNode<T> findLeaf(T value) {
+    private TreeNode<T> findToInsert(T value) {
         TreeNode<T> current = root;
-        while (current.isNotLeaf()) {
+        while (true) {
             if (current.isGreater(value)) {
-                current=current.getLeft();
+                if (current.hasLeft())
+                    current=current.getLeft();
+                else
+                    return current;
             } else if (current.isLower(value)) {
-                current=current.getRight();
+                if (current.hasRight())
+                    current=current.getRight();
+                else
+                    return current;
             }
         }
-        return current;
     }
 
     private void findMax() {
@@ -100,10 +105,6 @@ public class SplayTree<T> {
             targetNode = targetNode.splay();
         }
         this.root = targetNode;
-    }
-
-    void setRoot(TreeNode<T> root) {
-        this.root = root;
     }
 
     public String print() {

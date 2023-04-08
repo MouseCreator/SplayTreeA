@@ -1,9 +1,10 @@
 public class TreeNode<T> {
     private final T value;
     private TreeNode<T> left;
-    private final SplayTree<T> tree;
     private TreeNode<T> right;
     private TreeNode<T> parent;
+
+    private final SplayTree<T> tree;
 
     public TreeNode(T value, TreeNode<T> parent, SplayTree<T> tree) {
         this.left = null;
@@ -72,7 +73,7 @@ public class TreeNode<T> {
             return zigZigRight();
         }
         if (isLeftChild()) {
-            return zigZagLeft();
+            return zigZagRight();
         }
         throw new IllegalStateException("Node is neither a root nor a child node.");
     }
@@ -159,10 +160,6 @@ public class TreeNode<T> {
 
     public void setRight(TreeNode<T> subtree) {
         this.right = subtree;
-    }
-
-    public boolean isNotLeaf() {
-        return hasLeft() || hasRight();
     }
 
     public void setLeft(TreeNode<T> left) {
