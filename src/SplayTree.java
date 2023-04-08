@@ -26,4 +26,8 @@ public class SplayTree<T> {
     private void splay(T value) {
 
     }
+
+    void setRoot(TreeNode<T> root) {
+        this.root = root;
+    }
 }

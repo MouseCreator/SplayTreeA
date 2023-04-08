@@ -83,25 +83,41 @@ public class TreeNode<T> {
         }
         throw new IllegalStateException("Node is not a root and a child node.");
     }
+    private void setLeftChild(TreeNode<T> parentNode, TreeNode<T> childNode) {
+        parentNode.left = childNode;
+        childNode.parent = parentNode;
+    }
+    private void setRightChild(TreeNode<T> parentNode, TreeNode<T> childNode) {
+        parentNode.right = childNode;
+        childNode.parent = parentNode;
+    }
+    private void zigLeft() {
+         assert isRoot();
+         TreeNode<T> XNode = this.left;
+         tree.setRoot(XNode);
+         setLeftChild(this, XNode.right);
+         setRightChild(XNode, this);
+    }
+    private void zigRight() {
+        assert isRoot();
+        TreeNode<T> XNode = this.right;
+        tree.setRoot(XNode);
+        setRightChild(this, XNode.right);
+        setLeftChild(XNode, this);
+    }
+    private void zigZigLeft() {
+        assert !isRoot();
+    }
+    private void zigZagLeft() {
+        assert !isRoot();
+    }
     private void zigZagRight() {
+        assert !isRoot();
     }
 
     private void zigZigRight() {
-        
+        assert !isRoot();
     }
-    private void zigLeft() {
-
-    }
-    private void zigRight() {
-
-    }
-    private void zigZigLeft() {
-
-    }
-    private void zigZagLeft() {
-
-    }
-
     public TreeNode<T> getParent() {
         return parent;
     }
@@ -110,3 +126,4 @@ public class TreeNode<T> {
         this.parent = parent;
     }
 }
+
