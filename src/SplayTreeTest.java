@@ -25,16 +25,35 @@ class SplayTreeTest {
     @Test
     void testRandomInsertTree() {
         SplayTree<Double> tree = new SplayTree<>(new DoublesComparator());
-        Double[] doubles = new Double[]{1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0};
-        ArrayList<Double> list = new ArrayList<>(Arrays.asList(doubles));
+        ArrayList<Double> list = createArray();
         for (int i = 0; i < 20; i++) {
             Collections.shuffle(list);
-            System.out.println(list);
-            for (Double d : doubles) {
+            tree.clear();
+            for (Double d : list) {
                 tree.add(d);
             }
             assertEquals("[1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0]", tree.print());
         }
+    }
+
+    @Test
+    void testTreeDeletion() {
+        SplayTree<Double> tree = new SplayTree<>(new DoublesComparator());
+        ArrayList<Double> list = createArray();
+        for (int i = 0; i < 20; i++) {
+            Collections.shuffle(list);
+            tree.clear();
+            for (Double d : list) {
+                tree.add(d);
+            }
+            tree.remove(5.0);
+            assertEquals("[1.0, 2.0, 3.0, 4.0, 6.0, 7.0, 8.0, 9.0]", tree.print());
+        }
+    }
+
+    private ArrayList<Double> createArray() {
+        Double[] doubles = new Double[]{1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0};
+        return new ArrayList<>(Arrays.asList(doubles));
     }
 
     @Test
