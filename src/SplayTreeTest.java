@@ -51,6 +51,22 @@ class SplayTreeTest {
         }
     }
 
+    @Test
+    void testTreeFind() {
+        SplayTree<Double> tree = new SplayTree<>(new DoublesComparator());
+        ArrayList<Double> list = createArray();
+        for (int i = 0; i < 20; i++) {
+            Collections.shuffle(list);
+            tree.clear();
+            for (Double d : list) {
+                tree.add(d);
+            }
+            tree.find(5.0);
+            assertTrue(tree.root.isValueOf(5.0));
+            assertEquals("[1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0]", tree.print());
+        }
+    }
+
     private ArrayList<Double> createArray() {
         Double[] doubles = new Double[]{1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0};
         return new ArrayList<>(Arrays.asList(doubles));
