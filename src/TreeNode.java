@@ -11,8 +11,8 @@ public class TreeNode<T> {
         this.tree = tree;
         this.parent = parent;
     }
-    private boolean isRoot() {
-        return this==tree.root;
+    boolean isRoot() {
+        return this.parent == null;
     }
     public boolean hasLeft() {
         return left != null;
@@ -24,28 +24,22 @@ public class TreeNode<T> {
     public String toString() {
         return "[T=" + value.toString() + "]";
     }
-    private boolean hasValueOf(T value) {
+    boolean isValueOf(T value) {
         return tree.getComparator().compare(this.value, value) == 0;
     }
-    public TreeNode<T> splay(T target) {
-        if (hasValueOf(target)) {
-            return this;
-        }
-        if (hasRight()) {
-            TreeNode<T> targetNode = right.splay(target);
-            if (targetNode != null) {
-                this.right = targetNode;
-                return rightSplay();
-            }
-        }
-        if (hasLeft()) {
-            TreeNode<T> targetNode = left.splay(target);
-            if (targetNode != null) {
-                this.left = targetNode;
-                return leftSplay();
-            }
-        }
-        return null;
+    boolean isGreater(T value) {
+        return tree.getComparator().compare(this.value, value) > 0;
+    }
+    boolean isLower(T value) {
+        return tree.getComparator().compare(this.value, value) < 0;
+    }
+    public TreeNode<T> splay() {
+        assert !isRoot();
+        if (isLeftChild())
+            return parent.leftSplay();
+        if (isRightChild())
+            return parent.rightSplay();
+        throw new IllegalStateException("Target node is neither a root nor a child node!");
     }
 
     private boolean isRightChild() {
@@ -93,8 +87,8 @@ public class TreeNode<T> {
     private TreeNode<T> zigLeft() {
          assert isRoot();
          TreeNode<T> XNode = this.left;
-         tree.setRoot(XNode);
          rotateLeft(this, XNode);
+         XNode.parent=null;
          return XNode;
     }
 
@@ -110,8 +104,8 @@ public class TreeNode<T> {
     private TreeNode<T> zigRight() {
         assert isRoot();
         TreeNode<T> XNode = this.right;
-        tree.setRoot(XNode);
         rotateRight(this, XNode);
+        XNode.parent=null;
         return XNode;
     }
     private TreeNode<T> zigZigLeft() {
@@ -146,6 +140,18 @@ public class TreeNode<T> {
         rotateRight(GNode, this);
         rotateRight(this, XNode);
         return XNode;
+    }
+
+    public TreeNode<T> getLeft() {
+        return left;
+    }
+
+    public TreeNode<T> getRight() {
+        return right;
+    }
+
+    public TreeNode<T> getParent() {
+        return parent;
     }
 }
 

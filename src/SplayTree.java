@@ -11,9 +11,22 @@ public class SplayTree<T> {
         this.comparator = comparator;
     }
 
-    public boolean get(T value) {
+    public boolean find(T value) {
+        TreeNode<T> current = root;
+        while (current != null) {
+            if (current.isValueOf(value)) {
+                splay(current);
+                return true;
+            }
+            if (current.isGreater(value)) {
+                current=current.getLeft();
+            } else if (current.isLower(value)) {
+                current=current.getRight();
+            }
+        }
         return false;
     }
+
 
     public void remove(T value) {
 
@@ -23,8 +36,11 @@ public class SplayTree<T> {
 
     }
 
-    private void splay(T value) {
-
+    private void splay(TreeNode<T> targetNode) {
+        while (!targetNode.isRoot()) {
+            targetNode = targetNode.splay();
+        }
+        this.root = targetNode;
     }
 
     void setRoot(TreeNode<T> root) {
