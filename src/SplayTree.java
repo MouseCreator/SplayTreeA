@@ -37,9 +37,19 @@ public class SplayTree<T> {
     public void remove(T value) {
         TreeNode<T> target = findNode(value);
         splay(target);
-        SplayTree<T> other = new SplayTree<>(root.getRight(), comparator);
-        this.root = root.getLeft();
-        this.mergeWith(other);
+        if (this.root.hasLeft() && this.root.hasRight()) {
+            SplayTree<T> other = new SplayTree<>(root.getRight(), comparator);
+            this.root = root.getLeft();
+            this.mergeWith(other);
+        } else {
+            if (this.root.hasLeft()) {
+                this.root = root.getLeft();
+            } else {
+                this.root = root.getRight();
+            }
+            this.root.setParent(null);
+        }
+
     }
 
     private TreeNode<T> findNode(T value) {
@@ -78,14 +88,14 @@ public class SplayTree<T> {
     private TreeNode<T> findToInsert(T value) {
         TreeNode<T> current = root;
         while (true) {
-            if (current.isGreater(value)) {
-                if (current.hasLeft())
-                    current=current.getLeft();
+            if (current.isLower(value)) {
+                if (current.hasRight())
+                    current=current.getRight();
                 else
                     return current;
             } else {
-                if (current.hasRight())
-                    current=current.getRight();
+                if (current.hasLeft())
+                    current=current.getLeft();
                 else
                     return current;
             }

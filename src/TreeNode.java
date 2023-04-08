@@ -206,5 +206,9 @@ public class TreeNode<T> {
             right=null;
         }
     }
+
+    public void setParent(TreeNode<T> treeNode) {
+        this.parent = treeNode;
+    }
 }
 

@@ -23,6 +23,24 @@ class SplayTreeTest {
     }
 
     @Test
+    void testEqualDoublesInsertTree() {
+        SplayTree<Double> tree = new SplayTree<>(new DoublesComparator());
+        tree.add(1.0);
+        tree.add(1.0);
+        tree.add(2.0);
+        tree.add(2.0);
+        tree.add(4.0);
+        tree.add(4.0);
+        tree.add(1.0);
+        tree.add(4.0);
+        tree.add(3.0);
+        tree.remove(2.0);
+        System.out.println(tree.print());
+        tree.remove(1.0);
+        assertEquals("[1.0, 1.0, 2.0, 3.0, 4.0, 4.0, 4.0]", tree.print());
+    }
+
+    @Test
     void testRandomInsertTree() {
         SplayTree<Double> tree = new SplayTree<>(new DoublesComparator());
         ArrayList<Double> list = createArray();
