@@ -6,6 +6,9 @@ import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Тести для розширюваного дерева
+ */
 class SplayTreeTest {
     @Test
     void testLinearInsertTree() {
