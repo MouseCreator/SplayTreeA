@@ -1,4 +1,4 @@
-public class TreeNode<T> {
+class TreeNode<T> {
     private final T value;
     private TreeNode<T> left;
     private TreeNode<T> right;

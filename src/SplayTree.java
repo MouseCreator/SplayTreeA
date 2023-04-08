@@ -1,7 +1,7 @@
 import java.util.Comparator;
 import java.util.NoSuchElementException;
 
-public class SplayTree<T> {
+public final class SplayTree<T> {
     private final Comparator<T> comparator;
 
     public SplayTree(TreeNode<T> root, Comparator<T> comparator) {
