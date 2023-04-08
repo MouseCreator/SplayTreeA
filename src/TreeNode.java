@@ -78,11 +78,13 @@ public class TreeNode<T> {
     }
     private void setLeftChild(TreeNode<T> parentNode, TreeNode<T> childNode) {
         parentNode.left = childNode;
-        childNode.parent = parentNode;
+        if (childNode != null)
+            childNode.parent = parentNode;
     }
     private void setRightChild(TreeNode<T> parentNode, TreeNode<T> childNode) {
         parentNode.right = childNode;
-        childNode.parent = parentNode;
+        if (childNode != null)
+            childNode.parent = parentNode;
     }
     private TreeNode<T> zigLeft() {
          assert isRoot();
@@ -159,7 +161,7 @@ public class TreeNode<T> {
     }
 
     public boolean isNotLeaf() {
-        return !hasLeft() && !hasRight();
+        return hasLeft() || hasRight();
     }
 
     public void setLeft(TreeNode<T> left) {

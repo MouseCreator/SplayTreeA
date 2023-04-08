@@ -68,7 +68,7 @@ public class SplayTree<T> {
         }
         TreeNode<T> target = findLeaf(value);
         TreeNode<T> additionalNode = new TreeNode<>(value, target, this);
-        if (additionalNode.isLower(value)) {
+        if (target.isLower(value)) {
             target.setRight(additionalNode);
         } else {
             target.setLeft(additionalNode);
@@ -79,9 +79,9 @@ public class SplayTree<T> {
         TreeNode<T> current = root;
         while (current.isNotLeaf()) {
             if (current.isGreater(value)) {
-                current=current.getLeft();
-            } else if (current.isLower(value)) {
                 current=current.getRight();
+            } else if (current.isLower(value)) {
+                current=current.getLeft();
             }
         }
         return current;

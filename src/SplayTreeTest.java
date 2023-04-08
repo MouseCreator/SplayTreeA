@@ -8,6 +8,7 @@ class SplayTreeTest {
         SplayTree<Double> tree = new SplayTree<Double>(new DoublesComparator());
         tree.add(1.0);
         tree.add(2.0);
+        System.out.print(tree.print());
         tree.add(3.0);
         tree.add(4.0);
         tree.add(5.0);
