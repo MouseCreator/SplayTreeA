@@ -72,7 +72,7 @@ public class TreeNode<T> {
             return zigZigRight();
         }
         if (isLeftChild()) {
-            return zigZagRight();
+            return zigZagLeft();
         }
         throw new IllegalStateException("Node is neither a root nor a child node.");
     }
