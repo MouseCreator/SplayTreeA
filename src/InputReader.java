@@ -33,22 +33,6 @@ public class InputReader {
     }
 
     private static boolean isNotReadable(String line) {
-        return line.isEmpty() || line.contains("degree") || line.startsWith("#");
-    }
-
-    public static int readDegree() throws IOException {
-        String inputFile = "data/input.txt";
-        BufferedReader reader = new BufferedReader(new FileReader(inputFile)); //відкрити файл
-        while (true) {
-            String line = reader.readLine(); //зчитуємо файл по рядках
-            if (line == null)
-                break;
-            if (line.contains("degree")) {
-                line = line.replaceAll("[^0-9]","");
-                int i = Integer.parseInt(line);
-                return Math.max(i, 3);
-            }
-        }
-        return 3;
+        return line.isEmpty() || line.startsWith("#");
     }
 }

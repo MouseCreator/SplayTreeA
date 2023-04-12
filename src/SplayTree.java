@@ -111,6 +111,7 @@ public final class SplayTree<T> {
     /**
      * Об'єднання дерева з більшим деревом.
      * @param bigger - дерево для об'єднання.
+     * @throws IllegalArgumentException - якщо не виконується умова про те, що інше дерево є більшим
      */
     public void mergeWith(SplayTree<T> bigger) {
         findMax();
