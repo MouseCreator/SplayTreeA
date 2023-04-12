@@ -242,4 +242,8 @@ public final class SplayTree<T> {
     public int size() {
         return root == null ? 0 : root.size();
     }
+
+    public String asTree() {
+        return root.asTree(0);
+    }
 }

@@ -376,5 +376,22 @@ class TreeNode<T> {
     public T getValue() {
         return value;
     }
+
+    public String asTree(int tab) {
+        String result = "\t".repeat(tab);
+        result += value.toString();
+        result += "\n";
+        if (hasLeft()) {
+            result += left.asTree(tab+1);
+        } else {
+            result += "\t".repeat(tab+1) + "-\n";
+        }
+        if (hasRight()) {
+            result += right.asTree(tab+1);
+        } else {
+            result += "\t".repeat(tab+1) + "-\n";
+        }
+        return result;
+    }
 }
 
