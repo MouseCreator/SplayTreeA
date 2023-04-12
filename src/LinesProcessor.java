@@ -40,7 +40,7 @@ public class LinesProcessor {
                             }
                         }
                     } catch(NumberFormatException e){
-                        OutputWriter.write(String.format("Unable to parse %s to double", s));
+                        OutputWriter.write(String.format("Cannot resolve '%s'", s));
                     }
                 }
             }
