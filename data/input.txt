@@ -6,4 +6,7 @@ remove 3
 print
 elements
 remove 10
+clear
+print
+#This is comment
 hello

@@ -244,6 +244,9 @@ public final class SplayTree<T> {
     }
 
     public String asTree() {
+        if (root == null) {
+            return "Tree is empty";
+        }
         return root.asTree(0);
     }
 }
