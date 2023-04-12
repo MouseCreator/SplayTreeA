@@ -377,6 +377,11 @@ class TreeNode<T> {
         return value;
     }
 
+    /**
+     * Вивід вузла та піддерев у табульованому вигляді
+     * @param tab - рівень табуляції
+     * @return рядкове представлення вузла
+     */
     public String asTree(int tab) {
         String result = "\t".repeat(tab);
         result += value.toString();

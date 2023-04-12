@@ -243,6 +243,10 @@ public final class SplayTree<T> {
         return root == null ? 0 : root.size();
     }
 
+    /**
+     *
+     * @return рядкове представлення дерева у вигляді табуляційK
+     */
     public String asTree() {
         if (root == null) {
             return "Tree is empty";
