@@ -10,27 +10,28 @@ public class LinesProcessor {
             String currentCommand = "add";
             for (String s : strings) {
                 if (isCommand(s)) {
-                    if (s.equals("print")) {
-                        OutputWriter.write("SPLAY TREE:\n" + tree.asTree());
-                    } else if (s.equals("clear")) {
-                        OutputWriter.write("Removed all elements from the tree");
-                        tree.clear();
-                    } else {
-                        currentCommand = s;
+                    switch (s) {
+                        case "print" -> OutputWriter.write("SPLAY TREE:\n" + tree.asTree());
+                        case "clear" -> {
+                            OutputWriter.write("Removed all elements from the tree");
+                            tree.clear();
+                        }
+                        case "elements" -> OutputWriter.write(tree.print());
+                        default -> currentCommand = s;
                     }
                 } else {
                     try {
                         Double d = Double.parseDouble(s);
                         switch (currentCommand) {
-                            case "add" -> {
+                            case "add", "insert" -> {
                                 tree.add(d);
                                 OutputWriter.write("Added " + d);
                             }
-                            case "find" -> OutputWriter.write(tree.find(d) ? "Found " + s + " in the tree" :
+                            case "find", "get" -> OutputWriter.write(tree.find(d) ? "Found " + s + " in the tree" :
                                     "Did not find " + s + " in the tree");
-                            case "remove" -> {
+                            case "remove", "delete" -> {
                                 tree.remove(d);
-                                OutputWriter.write("Removed" + d);
+                                OutputWriter.write("Removed " + d);
                             }
                         }
                     } catch(NumberFormatException e){
@@ -43,6 +44,8 @@ public class LinesProcessor {
         }
     }
     private boolean isCommand(String str) {
-        return str.equals("add") || str.equals("remove") || str.equals("find") || str.equals("print") || str.equals("clear");
+        return str.equals("add") || str.equals("remove") || str.equals("find") ||
+                str.equals("print") || str.equals("clear") || str.equals("elements") || str.equals("get") ||
+                str.equals("insert") || str.equals("delete");
     }
 }
