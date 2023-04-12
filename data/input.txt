@@ -5,3 +5,4 @@ print
 remove 3
 print
 elements
+remove 10

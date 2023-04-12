@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 public class LinesProcessor {
     public void process() {
@@ -27,11 +28,15 @@ public class LinesProcessor {
                                 tree.add(d);
                                 OutputWriter.write("Added " + d);
                             }
-                            case "find", "get" -> OutputWriter.write(tree.find(d) ? "Found " + s + " in the tree" :
-                                    "Did not find " + s + " in the tree");
+                            case "find", "get" -> OutputWriter.write(tree.find(d) ? "Found " + d + " in the tree" :
+                                    "Did not find " + d + " in the tree");
                             case "remove", "delete" -> {
-                                tree.remove(d);
-                                OutputWriter.write("Removed " + d);
+                                try {
+                                    tree.remove(d);
+                                    OutputWriter.write("Removed " + d);
+                                } catch (NoSuchElementException e) {
+                                    OutputWriter.write("No element " + d + " in the tree");
+                                }
                             }
                         }
                     } catch(NumberFormatException e){
