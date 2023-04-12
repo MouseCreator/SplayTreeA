@@ -2,7 +2,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
+/**
+ * Клас для опрацювання вхідних даних
+ */
 public class LinesProcessor {
+    /**
+     * Метод зчитує дані з вхідного файлу та виводить результати у вихідний
+     */
     public void process() {
         OutputWriter.refresh();
         SplayTree<Double> tree = new SplayTree<>(new DoublesComparator());
@@ -48,6 +54,12 @@ public class LinesProcessor {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Перевірка, чи є вхідний рядок командою
+     * @param str - вхідний рядок
+     * @return true, якщо рядок є командою
+     */
     private boolean isCommand(String str) {
         return str.equals("add") || str.equals("remove") || str.equals("find") ||
                 str.equals("print") || str.equals("clear") || str.equals("elements") || str.equals("get") ||
